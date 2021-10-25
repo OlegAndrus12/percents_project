@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{%block content %}
+ <div class="py-5 h-100 text-center align-items-center d-flex" style="background-image: linear-gradient(to left bottom, rgba(189, 195, 199, .75), rgba(44, 62, 80, .75)); background-size: 100%;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-8 mx-auto"> 
+            <img src={{ url_for('static', filename='images/icon.png')}} height="75px" alt="icon">
+            <h1 class="display-3 mb-4">Percentager</h1>
+            <p class="lead mb-5">Gandalf: You cannot pass! I am a servant of the Secret Fire, wielder of the Flame of Anor. The dark fire will not avail you, Flame of Udun! Go back to the login page or register yourself. May the force be with you</p> 
+            {% for id in ids%}
+                <a class="btn btn-lg mx-1 btn-outline-dark" href = "{{ url_for('tasks', task_id=id) }}">Тема {{id}}</a> 
+            {% endfor %}
+                <a class="btn btn-lg mx-1 btn-outline-dark" href = "{{ url_for('all') }}">Усі теми</a> 
+        </div>
+      </div>
+    </div>
+  </div>
+{%endblock%} 
