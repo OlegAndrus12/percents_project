@@ -1,4 +1,20 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>{{data}}</h1>
+{% extends "navbar.html" %}
+{% block main %}
+  <div class="py-5">
+    <div class="container">
+    {% for task in tasks %}
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+          <div class="card bg-light mb-3">
+            <div class="card-header">{{task[1]}}</div>
+            <div class="card-body">
+              <p class="card-text">{{task[2]}}</p>
+            </div>
+            <a href="{{url_for("details", task_id = task[0])}}" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand" href="{{url_for('index')}}">
+    <img src="{{ url_for('static', filename='images/icon.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Percentager </a>
+        <div class="navbar-nav mr-4">
+    		<a class="nav-item nav-link text-dark" href="{{url_for('index')}}">Home</a>
+    	</div>
+  </nav>
+  {% block main %}{% endblock %}
+{% endblock %}
