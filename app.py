@@ -1,5 +1,8 @@
-from flask import Flask, render_template
 import json
+from flask import Flask, render_template, request
+from chapter1 import *
+from chapter2 import *
+from chapter3 import *
 
 app = Flask(__name__)
 
@@ -31,9 +34,29 @@ def tasks(task_id):
     print(tasks)
     return render_template("tasks.html", tasks = tasks) 
 
-@app.route('/details/<task_id>')
+@app.route('/details/<task_id>', methods=['GET', 'POST'])
 def details(task_id):
-    return render_template("details.html")
+    if request.method == 'POST':
+        form = request.form
+        for i in form:
+            print(i)
+
+    for i in data.values():
+        for j in i:
+            if task_id == j["id"]:
+                context = {
+                    "task_id" : j["id"],
+                    "header" : j["header"],
+                    "body" : j["body"],
+                    "fields" : list(zip(j["fields"], j["defaults"]))
+                }
+
+    return render_template("details.html", **context) 
+
+def call_appropriate_function(task_id):
+    function_list = {
+        "1" : f1,
+    }
 
 if __name__ == '__main__':
     app.run(debug=True)

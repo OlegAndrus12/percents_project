@@ -47,8 +47,8 @@ execution_queue = {
     f29 : [3, 0.75],
 
 }
-
+'''
 for i in execution_queue:
     i(*execution_queue[i])
     print("#" * 20)
-    
+'''   

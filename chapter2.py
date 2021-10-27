@@ -102,7 +102,8 @@ execution_queue = {
                     f23: [100000, 3.5, 0.2],
                     f24: [50000, 0.17, 5],
 }
-
+'''
 for i in execution_queue:
     i(*execution_queue[i])
     print("#" * 20)
+'''

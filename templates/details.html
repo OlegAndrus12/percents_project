@@ -1,4 +1,25 @@
 {% extends "navbar.html" %}
 {% block main %}
-<h1>Hello</h1>
+  <div class="py-5">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <div class="card bg-light mb-4">
+            <div class="card-header">{{header}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{body}}</h5>
+            </div>
+          </div>
+        </div>
+        <form action="{{url_for("details", task_id=task_id)}}" method="post">
+        {% for item in fields%}
+          <div class="form-group">
+            <label for="{{item[0]}}">{{item[0]}}</label>
+            <input type="text" id = "{{item[0]}}" class="form-control" name = "{{item[0]}}" value="{{item[1]}}">
+        </div>
+        {%endfor %}
+      <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+    </div>
+  </div>
 {% endblock %}
