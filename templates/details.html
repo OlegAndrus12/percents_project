@@ -11,6 +11,17 @@
             </div>
           </div>
         </div>
+        {%if answer %}
+        <div class="col-md-10">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header" >Answer</div>
+            <div class="card-body">
+              <H5 class="card-text">{{answer}}</h5>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <div class="col-md-6">
         <form action="{{url_for("details", task_id=task_id)}}" method="post">
         {% for item in fields%}
           <div class="form-group">
@@ -18,8 +29,10 @@
             <input type="text" id = "{{item[0]}}" class="form-control" name = "{{item[0]}}" value="{{item[1]}}">
         </div>
         {%endfor %}
-      <input type="submit" class="btn btn-primary" value="Submit"/>
+      <input type="submit" class="btn btn-lg mx-1 btn-outline-dark" value="Submit"/>
+      <a class="btn btn-lg mx-1 btn-outline-dark" href = "{{ url_for('details', task_id=task_id) }}">Again</a> 
     </form>
+    </div>
     </div>
   </div>
 {% endblock %}

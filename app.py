@@ -36,10 +36,6 @@ def tasks(task_id):
 
 @app.route('/details/<task_id>', methods=['GET', 'POST'])
 def details(task_id):
-    if request.method == 'POST':
-        form = request.form
-        for i in form:
-            print(i)
 
     for i in data.values():
         for j in i:
@@ -48,15 +44,59 @@ def details(task_id):
                     "task_id" : j["id"],
                     "header" : j["header"],
                     "body" : j["body"],
-                    "fields" : list(zip(j["fields"], j["defaults"]))
+                    "fields" : list(zip(j["fields"], j["defaults"])),
+                    "is_answer" : False,
+                    "answer" : ""
                 }
 
+    if request.method == 'POST':
+        form = request.form
+        d = {i: float(form[i]) if not "/" in form[i] else form[i] for i in form}
+        output = call_appropriate_function(task_id, d)
+        print(output)
+        context["is_answer"] = True
+        context["answer"] = output
+        return render_template("details.html", **context)
+    print("asd")
     return render_template("details.html", **context) 
 
-def call_appropriate_function(task_id):
+def call_appropriate_function(task_id, context):
     function_list = {
         "1" : f1,
+        "2" : f2,
+        "3" : f3,
+        "4" : f4,
+        "5" : f5,
+        "6" : f6,
+        "7" : f7,
+        "8" : f8,
+        "9" : f9,
+        "10" : f10,
+        "11" : f11,
+        "12" : f12,
+        "13" : f13,
+        "14" : f14,
+        "15" : f15,
+        "16" : f16,
+        "17" : f17,
+        "18" : f18,
+        "19" : f19,
+        "20" : f20,
+        "21" : f21,
+        "22" : f22,
+        "23" : f23,
+        "24" : f24,
+        "25" : f25,
+        "26" : f26,
+        "27" : f27,
+        "28" : f28,
+        "29" : f29,
     }
 
+    func = function_list[task_id]
+    
+    res = func(**context)
+    return res
+    
 if __name__ == '__main__':
     app.run(debug=True)

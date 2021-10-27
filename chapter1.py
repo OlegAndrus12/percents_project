@@ -1,11 +1,10 @@
 from datetime import datetime
 
 # нарощення за простими відсотковими ставками
-def f1 (n, P, i):
+def f1 (P, n, i):
     I = n * P * i
     S = P + I
-    print(f'I = {I} grn')
-    print(f'S = {S} grn')
+    return f'I = n * P * i =  {I} grn \nS = P + I = {S} grn'
 
 # методи нарахування простих відсотків
 # перший метод
@@ -16,7 +15,7 @@ def f2 (P, start_date, end_date, i):
     delta = end_date - start_date
     t = delta.days
     S = P * (1 + t/K * i)
-    print(f'S = {S} grn')
+    return f'K = {K}, t = {t}, S = {round(S,2)} grn'
 
 
 # другий метод
