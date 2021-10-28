@@ -1,3 +1,4 @@
+import ast
 from datetime import datetime
 
 # нарощення за простими відсотковими ставками
@@ -26,7 +27,7 @@ def f3 (P, start_date, end_date, i):
     delta = end_date - start_date
     t = delta.days
     S = P * (1 + t/K * i)
-    print(f'S = {S} grn')
+    return f'K = {K}, t = {t}, S = {round(S,2)} grn'
 
 
 # третій метод
@@ -36,7 +37,7 @@ def f4(P, start_date, end_date, i):
     end_date = datetime.strptime(end_date,"%d/%m/%Y")
     t = (30 - start_date.day) + end_date.day + (end_date.month - start_date.month - 1) * 30
     S = P * (1 + t/K * i)
-    print(f'S = {S} grn')
+    return f'K = {K}, t = {t}, S = {round(S,2)} grn'
 
 # заміна відсоткової ставки
 def convert_simple_to_exect(simple, is_leap = False):
@@ -58,8 +59,7 @@ def f5(P, i0, step):
         res += 1/4 * i0
         i0 += step
     S = res * P
-    print(f"Множник нарощення : {res}")
-    print(f'S = {S} grn')
+    return f"Множник нарощення становить : {res}, а накопичена на рахунку за рік сума складе S = {S} грн"
 
 # формула для капіталізації приклад 4
 def f6(P, i, quartal, is_leap):
@@ -83,16 +83,17 @@ def f6(P, i, quartal, is_leap):
             S = P * (1 + 31/366 * i) * (1 + 30/366 * i)*(1 + 31/366 * i)
         else: 
             S = P * (1 + 31/365 * i) * (1 + 30/365 * i)*(1 + 31/365 * i)
-    print(f"S = {S} grn")
+    return f"S = {round(S,2)} grn"
 
 # нарахування простих відсотків на змінні в часі суми депозиту
 # приклад 7
 
 def f7(changes, i):
+    changes = ast.literal_eval(changes)
     K = 365 / (i * 100)
     remainder = 0
     res = 0
-    print("Дата         Рух коштів      Залишок  Термін  Процентне число")
+    output = "Дата         Рух коштів      Залишок  Термін  Процентне число|"
     for i in range(len(changes)):
         remainder += changes[i][1]
         if i != len(changes)-1:
@@ -101,10 +102,10 @@ def f7(changes, i):
         else:
             delta = datetime.strptime("31/12/2021", "%d/%m/%Y") - datetime.strptime(changes[i][0], "%d/%m/%Y")
             t = delta.days
-        print(f'{changes[i][0]}     {changes[i][1]}     {remainder}      {t}        {(remainder * t) / 100000}')
+        output += f'|{changes[i][0]}     {changes[i][1]}     {remainder}      {t}        {(remainder * t) / 100000}'
         res += (remainder * t) / 100000
     
-    print(f"Проценти за весь період нарахувань становитимуть : {res} / {K} = {res/K} grn")
+    return output + f"||Проценти за весь період нарахувань становитимуть : {res} / {round(K,2)} = {round(res/K, 2)} grn"
 
 
 # нарахування відсотків у користувацькому кредиті
@@ -166,11 +167,7 @@ f5(10000, 0.15, 0.05)
 print("#" * 20)
 f6(1000, 0.1, 1, True)
 print("#" * 20)
-data = [
-    ("05/02/2021", 120000),
-    ("10/07/2021", -40000),
-    ("20/10/2021", 80000)
-]
+data = [("05/02/2021", 120000),("10/07/2021", -40000),("20/10/2021", 80000)]
 f7(data, 0.15)
 print("#" * 20)
 f8(100000, 3, 0.15)

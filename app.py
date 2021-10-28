@@ -36,17 +36,19 @@ def tasks(task_id):
 
 @app.route('/details/<task_id>', methods=['GET', 'POST'])
 def details(task_id):
-
-    for i in data.values():
-        for j in i:
+    
+    for i in data:
+        for j in data[i]:
             if task_id == j["id"]:
+                
                 context = {
                     "task_id" : j["id"],
                     "header" : j["header"],
                     "body" : j["body"],
                     "fields" : list(zip(j["fields"], j["defaults"])),
                     "is_answer" : False,
-                    "answer" : ""
+                    "answer" : "",
+                    "chapter" : i
                 }
 
     if request.method == 'POST':
@@ -57,7 +59,6 @@ def details(task_id):
         context["is_answer"] = True
         context["answer"] = output
         return render_template("details.html", **context)
-    print("asd")
     return render_template("details.html", **context) 
 
 def call_appropriate_function(task_id, context):

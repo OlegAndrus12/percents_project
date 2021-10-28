@@ -7,7 +7,7 @@
           <div class="card bg-light mb-4">
             <div class="card-header">{{header}}</div>
             <div class="card-body">
-              <h5 class="card-title">{{body}}</h5>
+              <h5 id = "body" class="card-title">{{body}}</h5>
             </div>
           </div>
         </div>
@@ -16,7 +16,7 @@
           <div class="card text-white bg-primary mb-3">
             <div class="card-header" >Answer</div>
             <div class="card-body">
-              <H5 class="card-text">{{answer}}</h5>
+              <h5 id = "answer" class="card-text">{{answer}}</h5>
             </div>
           </div>
         </div>
@@ -31,6 +31,7 @@
         {%endfor %}
       <input type="submit" class="btn btn-lg mx-1 btn-outline-dark" value="Submit"/>
       <a class="btn btn-lg mx-1 btn-outline-dark" href = "{{ url_for('details', task_id=task_id) }}">Again</a> 
+      <a class="btn btn-lg mx-1 btn-outline-dark ml-6" href = "{{ url_for('tasks', task_id=chapter) }}">Back to the list</a> 
     </form>
     </div>
     </div>
