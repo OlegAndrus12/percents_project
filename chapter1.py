@@ -114,8 +114,9 @@ def f7(changes, i):
 def f8(P, n, i):
     S = P * (1 + n * i)
     R = S/(n*12)
-    print(f"Величина боргу разом з наразованими відсотками S = {S}")
-    print(f"Щомісячна виплата за користування кредитом становить R = {R}")
+    output = f"Величина боргу разом з наразованими відсотками S = {round(S, 2)}. "
+    output += f"Щомісячна виплата за користування кредитом становить R = {round(R, 2)}"
+    return output
 
 # дисконтування та облік за простими відсотковими ставками
 # математичне дисконтування
@@ -129,16 +130,17 @@ def f9(S, i, quartal, is_leap):
     n = (quartals[quartal] + 1)/366 if is_leap else quartals[quartal]/365
     P = S / (1 + n*i)
     D = S - P
-    print(f"P = {P}")
-    print(f"D = {D}")
+    leap = "високосного" if is_leap else "невисокосного"
+    output = f"Згідно умови задачі S = {S}, i = {i}. |Оскільки операція відбувається у {quartal} кварталі {leap},то термін угоди становить {quartals[quartal]} день"
+    return output + f"|P = {round(P,2)} | D = {round(D,2)}"
 
 # банківський облік
 # приклад 8
 def f10(S, n, d):
     P = S * (1-n*d)
     D = S-P
-    print(f"P = {P} grn")
-    print(f"D = {D} grn")
+    output = f"P = S * (1 - n*d) = {round(P)} grn|"
+    return output + f"D = S - P = {round(D)} grn"
 
 
 # приклад 9
@@ -146,8 +148,9 @@ def f11(S, d, t):
     K = 360
     P = S * (1 - t/360 * d)
     D = S - P
-    print(f'P = {P}')
-    print(f'D = {D}')
+    output = f"Згідно умови задачі маємо, що |S = {S} грн, d = {d}, t = {t}, K = {K}. Тоді:|"
+    output += f'P = {round(P,2)}' + f'|D = {round(D,2)}'
+    return output
 
 # нарощення за простими обліковими ставками
 def f12(P, n, d):
