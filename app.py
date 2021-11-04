@@ -31,7 +31,6 @@ def tasks(task_id):
     tasks = list()
     for i in data[task_id]:
         tasks.append(tuple(i.values()))
-    print(tasks)
     return render_template("tasks.html", tasks = tasks) 
 
 @app.route('/details/<task_id>', methods=['GET', 'POST'])
@@ -55,7 +54,6 @@ def details(task_id):
         form = request.form
         d = {i: float(form[i]) if not "/" in form[i] else form[i] for i in form}
         output = call_appropriate_function(task_id, d)
-        print(output)
         context["is_answer"] = True
         context["answer"] = output
         return render_template("details.html", **context)
